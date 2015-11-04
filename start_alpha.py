@@ -20,17 +20,19 @@ def insert_alpha_cuts():
         
     return cuts
         
-
 def insert_intervals():
     lower_cut = 0
     
     for c in cuts:
-        c.print_level()
-        #TODO type check
-        input2 = input("Please insert intervals for this alpha cut as a list of tupels: ")
-        if not check_input(input2, lower_cut):
-            return False
+        correct = False
         
+        while not correct:
+            c.print_level()
+            #TODO type check
+            input2 = input("Please insert intervals for this alpha cut as a list of tupels: ")
+            if check_input(input2, lower_cut):
+                correct = True
+            
         lower_cut = c
         c.add_intervals(input2)
 
@@ -79,7 +81,15 @@ def overlaps(tuple_list):
             raise ValueError('Intervals overlap. Abort calculations.')
         last = t[1]
 
-def get_membership(cuts,x):
+def get_output():
+    while True:
+        query = input("For which element do you want to check the membership degree? ")
+        try:
+            print "f(", query, ") =", get_membership(query)
+        except TypeError:
+            print "wrong input type."
+
+def get_membership(x):
     for cut in reversed(cuts):
         m = cut.membership(x)
         if m > -1:
@@ -93,4 +103,4 @@ while not cuts:
     
 insert_intervals()
 
-print get_membership(cuts, 3.5)
+get_output()
