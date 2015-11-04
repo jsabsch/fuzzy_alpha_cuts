@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import alpha_cut
-from duplicity.commandline import check_consistency
 
 
 def insert_alpha_cuts():
@@ -21,7 +20,6 @@ def insert_alpha_cuts():
         
     return cuts
         
-
 
 def insert_intervals():
     lower_cut = 0
@@ -81,10 +79,18 @@ def overlaps(tuple_list):
             raise ValueError('Intervals overlap. Abort calculations.')
         last = t[1]
 
+def get_membership(cuts,x):
+    for cut in reversed(cuts):
+        m = cut.membership(x)
+        if m > -1:
+            return m
+    return 0
 
-    
+
 cuts = []
 while not cuts:
     insert_alpha_cuts()
     
 insert_intervals()
+
+print get_membership(cuts, 3.5)
