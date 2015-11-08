@@ -1,18 +1,25 @@
 #!/usr/bin/env python
 
+
 class Alpha_Cut:
+    """
+    Represents one alpha cut, defined by his membership degree and a list of sets on this levels.
+    """
+
+
     
     def __init__(self, level):
         self.__level = level
         self.__intervals = []
 
     def add_intervals(self, inter_list):
+        """
+        Store a list of tuples within this alpha cut. They represent different subsets of membership on this degree.
+        """
         
         for i in inter_list:
             self.__intervals.append(i)
-            
-        return False
-    
+                
     def print_level(self):
         print "alpha cut at: ",self.__level
 
@@ -22,6 +29,9 @@ class Alpha_Cut:
             print i[0], ",", i[1]
             
     def check_consistency(self, tuple_list):
+        """
+        Check for a given list of tuples, if they lie within the boundaries of your own intervals.
+        """
         
         for t in tuple_list:
             is_consistent = False
@@ -38,6 +48,10 @@ class Alpha_Cut:
         return True
         
     def membership(self,x):
+        """
+        Check for a given value x, if lies within the boundaries of the subsets in this alpha cut.
+        """
+        
         for i in self.__intervals:
             # if x is smaller than lower boundary
             if i[0] > x:
