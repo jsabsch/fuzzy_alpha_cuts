@@ -40,10 +40,26 @@ def __check_length(set_1, set_2):
     return True
 
 def calc_goedel(x,y,mu,v):
-    # TODO: calculations!
-    return 0
+    g_matrix = [[0 for j in range(len(y))] for i in range(len(x))] 
+    for x_index in range(len(x)):
+        for y_index in range(len(y)):
+            if(mu[x_index] <= v[y_index]):
+                g_matrix[x_index][y_index] = 1
+            else:
+                g_matrix[x_index][y_index] = v[y_index];
+        
+    return g_matrix
 
-def output_solution(relations):
+def output_solution(set_X, set_Y, relations):
+    print "result:"
+    print "     ",
+    print set_Y
+    print "-------------------------------"
+    for x_size in range(len(relations)):
+        # for y_size in range(len(relations[1])):
+            print set_X[x_size], 
+            print " | ",
+            print relations[x_size]
     pass
     # TODO print output
 
@@ -60,5 +76,7 @@ set_Y = get_input('Y')
 mu = get_fuzzy_input("mu", set_X)
 v = get_fuzzy_input("v", set_Y)
 
-output_solution(calc_goedel(set_X, set_Y, mu, v))
+mat = calc_goedel(set_X, set_Y, mu, v)
+
+output_solution(set_X, set_Y, mat)
 
