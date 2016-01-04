@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 def get_input(name):
+    """ Receive a crisp set as user input.
+    """
+    
     set_1 = []
     
     while len(set_1) == 0:
@@ -17,6 +20,12 @@ def get_input(name):
     return set_1
 
 def get_fuzzy_input(name, set_1):
+    """ Receive a fuzzy set as user input.
+    
+    Calls get_input() and checks for correctness.
+    Correct sets are as long as the corresponding crisp sets and contain values between 0 and 1.
+    """
+    
     while True:
         set_2 = get_input(name)
 
@@ -24,6 +33,9 @@ def get_fuzzy_input(name, set_1):
             return set_2
 
 def __check_for_fuzzy(set_1):
+    """ Check for values outside of [0,1] within a given set.
+    """
+    
     for element in set_1:
         if element < 0 or element > 1:
             print "Your fuzzy input contains elements outside of [0,1]. Please change that."
@@ -33,6 +45,9 @@ def __check_for_fuzzy(set_1):
     return True
 
 def __check_length(set_1, set_2):
+    """ Compare the length of two sets. Only the same length is allowed.
+    """
+    
     if len(set_1) != len(set_2):
         print "Your fuzzy input is of different length than its associated set. Please change that."
         return False
@@ -40,6 +55,8 @@ def __check_length(set_1, set_2):
     return True
 
 def calc_goedel(x,y,mu,v):
+    """ Find the greatest solution for mu*phi = v with goedels relation.   
+    """ 
     g_matrix = [[0 for j in range(len(y))] for i in range(len(x))] 
     for x_index in range(len(x)):
         for y_index in range(len(y)):
@@ -51,6 +68,9 @@ def calc_goedel(x,y,mu,v):
     return g_matrix
 
 def output_solution(set_X, set_Y, relations):
+    """ Output the result of goedels relation.
+    """
+    
     print "result:"
     print "     ",
     print set_Y
